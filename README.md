@@ -1,26 +1,45 @@
-# Kairu - Task Manager 🚀
-*A powerful, hierarchical to-do list manager for your command line.*
+# Kairu - The Gamified Productivity Coach 🚀
 
-> Kairu is a sophisticated command-line task manager built with Python. It goes beyond a simple to-do list, offering a hierarchical organization system with groups, tasks, and sub-tasks, along with advanced productivity features to manage complex projects directly from your terminal.
+*An intelligent, hierarchical to-do list manager for your command line.*
+
+> Kairu is a sophisticated command-line application that transforms task management into a productive and engaging experience. It goes beyond a simple to-do list, offering a powerful suite of tools—from hierarchical organization and smart routines to a full gamification system—all designed to help you build focus, fight procrastination, and celebrate your progress directly from the terminal.
 
 -----
 
 ## ✨ Key Features
 
-  * **🗂️ Hierarchical Organization**: Structure your work with **Groups** → **Tasks** → **Sub-tasks**.
-  * **📝 Rich Task Attributes**: Assign a **priority**, a specific **due date/time**, and details.
-  * **⭐ Starred Tasks**: Mark your most important tasks with a star for quick access.
-  * **🏷️ Flexible Tagging**: Add multiple **tags** (e.g., `#client-a`, `#urgent`) for cross-group filtering.
+### 🏛️ Organization & Planning
+
+  * **Hierarchical Structure**: Organize your work with **Groups** → **Tasks** → **Sub-tasks**.
+  * **☀️ Daily Planner**: A guided `plan-day` routine to intelligently suggest and star your top priorities.
+  * **🌙 Evening Review**: A `shutdown` routine to review accomplishments, bulk reschedule pending items, and reflect on your day.
+
+### ✅ Advanced Task Management
+
+  * **Rich Attributes**: Assign priorities, specific due dates with times, and details to every task.
+  * **⭐ Starred Tasks**: Mark your most important tasks with a star for quick access via the `focus` command.
+  * **🏷️ Flexible Tagging**: Add multiple tags (e.g., `#client-a`, `#urgent`) for powerful, cross-group filtering.
   * **🔄 Recurring Tasks**: Automate routines by setting tasks to recur `daily`, `weekly`, or `monthly`.
   * **🗄️ Task Archiving**: Completed tasks are automatically moved to an archive, keeping your main view clean.
+
+### 🚀 Productivity Tools
+
+  * **🍅 Interactive Pomodoro Timer**: A built-in focus timer with `pause`, `continue`, and `stop` controls.
   * **🔍 Universal Search**: Instantly find any keyword across all tasks, groups, details, and archives.
-  * **💅 Polished UI**: A clean table view powered by `rich`, with colors and clear formatting.
+  * **🎯 Focus Command**: Get an intelligent, consolidated view of what to work on right now.
+
+### 🎮 Gamification Engine
+
+  * **🏆 Points & Levels**: Earn points for completing tasks (with bonuses\!) and level up from "Novice" to "Focus Guru".
+  * **🔥 Streaks & Freezes**: Build a streak of daily completions and spend points to buy "freezes" to protect it.
+  * **🎖️ Achievements**: Unlock badges for reaching productivity milestones like "Planner" and "On a Roll".
+  * **🎨 Unlockable Themes**: Spend points to unlock and apply new color themes for the interface.
 
 -----
 
 ## 🚀 Getting Started
 
-Get your local copy of Kairu up and running in a few simple steps.
+Get your local copy of Kairu up and running.
 
 ### Prerequisites
 
@@ -46,21 +65,52 @@ Get your local copy of Kairu up and running in a few simple steps.
 
 -----
 
-## 💻 Command Reference
+## 💻 Complete Command Reference
 
-Kairu is run from the command line using `python todo.py <command>`.
+Kairu is run from the command line using `python todo.py <command> [arguments]`.
 
-| Command | Description | Example |
+### 🏛️ Group & Task Management
+| Command | Description | Example Usage |
 | :--- | :--- | :--- |
-| **`group-add <name>`** | Creates a new task group. | `python todo.py group-add "Personal"` |
-| **`add <name>`** | Adds a new task to a group. | `python todo.py add "New Task" -g Work --tags "#proj-x"` |
-| **`view`** | Displays active tasks. | `python todo.py view --filter-priority high` |
-| **`view-completed`** | Displays archived tasks. | `python todo.py view-completed -g Personal` |
-| **`done <id>`** | Completes and archives a task. | `python todo.py done 3` |
-| **`star <id>`** | Stars an important task. | `python todo.py star 5` |
-| **`edit <id>`** | Edits a task's properties. | `python todo.py edit 5 --priority high --due "2025-07-22 18:00"` |
-| **`search <keyword>`** | Searches for a keyword. | `python todo.py search "budget"` |
-| **`delete <id>`** | Deletes a task. | `python todo.py delete 2` |
+| `group-add <name>` | Creates a new task group. | `python todo.py group-add "Project Phoenix"` |
+| `group-list` | Lists all created groups. | `python todo.py group-list` |
+| `add <name>` | Adds a new task to a group. | `python todo.py add "New Task" -g "Work" --tags "#proj"` |
+| `edit <id>` | Edits properties of a task. | `python todo.py edit 5 --priority high --due "2025-07-23 18:00"` |
+| `done <id>` | Completes a task, archives it, and awards points. | `python todo.py done 3` |
+| `delete <id>` | Permanently deletes a task. | `python todo.py delete 8` |
+| `clear` | Deletes all active tasks in all groups (asks for confirmation). | `python todo.py clear` |
+
+### 📋 Sub-task & Detail Management
+| Command | Description | Example Usage |
+| :--- | :--- | :--- |
+| `sub-add <id> <desc>` | Adds a sub-task to a parent task. | `python todo.py sub-add 5 "Create initial wireframes"` |
+| `sub-done <id> <sub_id>`| Marks a sub-task as complete. | `python todo.py sub-done 5 1` |
+| `star <id>` | Marks a task as important. | `python todo.py star 5` |
+| `unstar <id>` | Removes the star from a task. | `python todo.py unstar 5` |
+
+### 🚀 Productivity Routines
+| Command | Description | Example Usage |
+| :--- | :--- | :--- |
+| `plan-day` | Starts the guided daily planning session. | `python todo.py plan-day` |
+| `shutdown` | Starts the guided end-of-day review. | `python todo.py shutdown` |
+| `focus` | Shows an intelligent view of current priorities. | `python todo.py focus -g "Work"` |
+| `pomodoro` | Starts the interactive Pomodoro timer. | `python todo.py pomodoro -w 50 -b 10` |
+
+### 🎮 Gamification & Stats
+| Command | Description | Example Usage |
+| :--- | :--- | :--- |
+| `stats` | Displays your gamification progress and achievements. | `python todo.py stats` |
+| `view-completed` | Displays the archive of completed tasks for a group. | `python todo.py view-completed -g "Project Phoenix"` |
+| `buy-freeze` | Buys a streak freeze to protect your streak. | `python todo.py buy-freeze` |
+| `themes` | Lists available themes and their status. | `python todo.py themes` |
+| `unlock-theme <name>`| Unlocks a new theme using points. | `python todo.py unlock-theme forest` |
+| `set-theme <name>` | Sets your active theme from your unlocked collection. | `python todo.py set-theme forest` |
+
+### 🔍 Utility
+| Command | Description | Example Usage |
+| :--- | :--- | :--- |
+| `search <keyword>` | Searches for a keyword across all tasks and groups. | `python todo.py search "budget"` |
+| `[command] --help` | Shows detailed help for any command. | `python todo.py add --help` |
 
 -----
 
@@ -68,10 +118,8 @@ Kairu is run from the command line using `python todo.py <command>`.
 
   * **Phase 4: Architectural Refactoring**: Convert the procedural script into an Object-Oriented structure for better scalability.
   * **Phase 5: Professionalization & Deployment**: Package the application to be installable via `pip` and write unit tests.
-  * See the `ROADMAP.md` for more details.
 
 -----
 
 ## 📜 License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
