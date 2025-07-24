@@ -1,6 +1,6 @@
 # Kairu - The Gamified Productivity Coach 🚀
 
-*An intelligent, hierarchical to-do list manager for your command line, designed to build focus and motivation.*
+*An intelligent, hierarchical to-do list manager for your command line, built with a clean Object-Oriented architecture.*
 
 > Kairu is a sophisticated command-line application that transforms task management into a productive and engaging experience. It goes beyond a simple to-do list, offering a powerful suite of tools—from hierarchical organization and smart routines to a full gamification system—all designed to help you build focus, fight procrastination, and celebrate your progress directly from the terminal.
 
@@ -90,11 +90,8 @@ Kairu has a rich command set. Here are some of the most common commands. For a f
 
 ## 🗺️ Roadmap
 
-  * **Phase 4: Architectural Refactoring**: Convert the procedural script into an Object-Oriented structure for better scalability.
+  * **Phase 4: Architectural Refactoring (Completed)**: Converted the procedural script into a clean Object-Oriented structure with a separate data layer (models.py) and UI layer (main.py).
   * **Phase 5: Professionalization & Deployment**: Package the application to be installable via `pip` and write unit tests.
+  * **Phase 6: Database Integration**: Replace the JSON file with a robust SQLite database.
 
 -----
-
-## 📜 License
-
-Distributed under the MIT License.
