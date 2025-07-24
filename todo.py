@@ -23,9 +23,10 @@ THEMES = {
     "ocean": {"cyan": "blue", "magenta": "bright_blue", "green": "cyan", "yellow": "bright_yellow", "red": "bold red", "blue": "blue"}
 }
 
-THEME_COST = 20 # Cost to unlock a new theme
+THEME_COST = 500 # Cost to unlock a new theme
 STREAK_FREEZE_COST = 250
 # --- Theme ---
+# DONE
 def display_themes(data):
     stats = data['user_stats']
     console.print("\n[bold]--- Theme Shop ---[/bold]")
@@ -34,6 +35,7 @@ def display_themes(data):
         active = " (Active)" if theme_name == stats['active_theme'] else ""
         console.print(f"- {theme_name.capitalize()}: {status}{active}")
 
+#DONE
 def unlock_theme(data, theme_name):
     stats = data['user_stats']
     theme_name = theme_name.lower()
@@ -52,6 +54,8 @@ def unlock_theme(data, theme_name):
     stats['unlocked_themes'].append(theme_name)
     console.print(f"[green]Congratulations! You have unlocked the '{theme_name}' theme.[/green]")
 
+
+#DONE
 def set_theme(data, theme_name):
     stats = data['user_stats']
     theme_name = theme_name.lower()
@@ -63,6 +67,7 @@ def set_theme(data, theme_name):
     console.print(f"[green]Active theme set to '{theme_name}'.[/green]")
 
 # --- Data Handling ---
+# DONE
 def display_focus_view(tasks):
     """Displays a list of tasks in a special 'Focus' table."""
     if not tasks:
@@ -90,6 +95,7 @@ def display_focus_view(tasks):
     
     console.print(table)
 
+# DONE
 def buy_streak_freeze(data):
     stats = data['user_stats']
     if stats['points'] < STREAK_FREEZE_COST:
@@ -100,6 +106,7 @@ def buy_streak_freeze(data):
     stats['streak_freezes'] += 1
     console.print(f"[green]Streak Freeze purchased! You now have {stats['streak_freezes']}.[/green]")
 
+#DONE
 def get_focus_tasks(data, focus_group_name=None):
     """Gathers tasks for the focus view based on due date, starred status, and priority."""
     focus_list = []
@@ -144,6 +151,7 @@ def get_focus_tasks(data, focus_group_name=None):
     
     return focus_list
 
+#DONE
 def get_level(points):
     """Determines the user's level based on their total points."""
     if points < 100:
@@ -197,6 +205,7 @@ def save_data(data):
     with open(DATA_FILE, 'w') as file:
         json.dump(data, file, indent=4)
 
+#DONE
 def start_pomodoro(work_minutes=25, break_minutes=5):
     """Starts an interactive Pomodoro timer with pause, resume, and stop controls."""
     
@@ -255,6 +264,7 @@ def start_pomodoro(work_minutes=25, break_minutes=5):
         run_timer(break_minutes, "Break")
         console.print("\n[bold green]✅ Pomodoro complete! Ready for the next session.[/bold green]")
 
+#DONE
 def search_all(data, keyword):
     """Searches for a keyword across all groups, tasks, and sub-tasks."""
     results = []
@@ -280,6 +290,7 @@ def search_all(data, keyword):
 
     return results
 
+#DONE
 def display_single_task_view(data, task_id, show_log=False):
     """Displays a detailed panel for a single task."""
     group, task = find_task_by_id(data, task_id)
@@ -320,6 +331,7 @@ def display_single_task_view(data, task_id, show_log=False):
         
         console.print(log_table)
 
+#DONE
 def display_stats(data):
     """Displays user's progress stats, level, streak, freezes, and achievements."""
     stats = data.get('user_stats', {})
@@ -366,6 +378,7 @@ def display_stats(data):
     panel = Panel(stats_text, title="📊 Your Kairu Stats", border_style="bright_blue", expand=False)
     console.print(panel)
 
+#DONE
 def display_search_results(results):
     """Displays search results in a table."""
     if not results:
@@ -388,7 +401,7 @@ def display_search_results(results):
     
     console.print(table)
 
-# --- Helper Function ---
+#DONE
 def find_task_by_id(data, task_id):
     """Finds a task and its parent group by its permanent ID."""
     for group in data['groups']:
@@ -401,6 +414,7 @@ def find_task_by_id(data, task_id):
                 return group, task
     return None, None
 
+#DONE
 def parse_tags(tags_string):
     """Parses a comma-separated string of tags into a list."""
     if not tags_string:
@@ -409,6 +423,7 @@ def parse_tags(tags_string):
     tags = [f"#{tag.strip().lstrip('#')}" for tag in tags_string.split(',')]
     return tags
 
+#DONE
 def plan_day(data):
     """A guided routine to select top priorities from a smart-filtered list."""
     console.print("\n[bold green]☀️ Let's plan your day! Here are your top candidates:[/bold green]")
@@ -459,6 +474,7 @@ def plan_day(data):
     except ValueError:
         console.print("[bold red]Invalid input. Please enter numbers separated by commas.[/bold red]")
 
+#DONE
 def find_stale_task(data, stale_days=14):
     """Finds the oldest active task that has not been modified."""
     stale_tasks = []
@@ -480,6 +496,7 @@ def find_stale_task(data, stale_days=14):
         return stale_tasks[0]
     return None
 
+#DONE
 def unstuck_routine(data):
     """A guided routine to help the user take action on a single stale task."""
     console.print("\n[bold cyan]🔍 Let's find a task that might be stuck...[/bold cyan]")
@@ -518,6 +535,7 @@ def unstuck_routine(data):
     else:
         console.print("[yellow]Invalid option. No action taken.[/yellow]")
 
+#DONE
 # We also need a small helper to find a task's group name for the display
 def find_group_for_task(data, task_id):
     """Finds the group name for a given task ID."""
@@ -527,6 +545,7 @@ def find_group_for_task(data, task_id):
                 return group['name']
     return "N/A"
 
+#DONE
 def shutdown_routine(data):
     """A guided routine to review accomplishments, reschedule, and reflect."""
     console.print("\n[bold green]🌙 Let's wrap up the day.[/bold green]")
@@ -588,7 +607,7 @@ def shutdown_routine(data):
             
     console.print("\n[bold green]Shutdown routine complete. Well done today! 👏[/bold green]")
 
-# --- Group Management ---
+# --- Group Management --- #DONE
 def add_group(data, group_name):
     """Adds a new, empty task group."""
     for group in data['groups']:
@@ -603,6 +622,7 @@ def add_group(data, group_name):
     data['groups'].append(new_group)
     console.print(f"[green]Added new group: '{group_name}'[/green]")
 
+#DONE
 def list_groups(data):
     """Lists all existing task groups."""
     if not data['groups']:
@@ -613,6 +633,7 @@ def list_groups(data):
         console.print(f"- {group['name']}")
     console.print("")
 
+# DONE
 def edit_task(data, task_id, new_name=None, new_details=None, new_priority=None, new_due_date=None, new_tags_string=None, new_goal=None):
     """Edits any property of an existing task using its permanent ID."""
     group, task = find_task_by_id(data, task_id)
@@ -652,7 +673,7 @@ def edit_task(data, task_id, new_name=None, new_details=None, new_priority=None,
         
     console.print(f"[green]Successfully updated task #{task_id}.[/green]")
 
-# --- Task & Sub-task Management ---
+# --- Task & Sub-task Management --- #DONE
 def add_task(data, group_name, name, details=None, priority='medium', due_date=None, recurring=None, tags_string=None, goal_name=None):
     """Adds a new task to a specified group."""
     target_group = next((g for g in data['groups'] if g['name'].lower() == group_name.lower()), None)
@@ -705,6 +726,7 @@ def add_task(data, group_name, name, details=None, priority='medium', due_date=N
     target_group['tasks'].append(new_task)
     console.print(f"[green]Added task '{name}' (ID: {new_id}) to group '{target_group['name']}'.[/green]")
 
+#DONE
 def add_sub_task(data, parent_id, description):
     """Adds a sub-task to a parent task using its permanent ID."""
     group, task = find_task_by_id(data, parent_id)
@@ -726,6 +748,7 @@ def add_sub_task(data, parent_id, description):
         
     console.print(f"[green]Added sub-task to '{task['name']}'.[/green]")
 
+# DONE
 def add_goal(data, name, description=None):
     if any(g['name'].lower() == name.lower() for g in data['goals']):
         console.print(f"[bold red]Error: Goal '{name}' already exists.[/bold red]")
@@ -735,6 +758,7 @@ def add_goal(data, name, description=None):
     data['goals'].append(new_goal)
     console.print(f"[green]Added new goal: '{name}'[/green]")
 
+#DONE
 def list_goals(data):
     if not data['goals']:
         console.print("[yellow]No goals defined. Use 'goal-add' to create one.[/yellow]")
@@ -749,56 +773,7 @@ def list_goals(data):
     
     console.print(table)
 
-def plan_day(data):
-    """A guided routine to select top priorities from a smart-filtered list."""
-    console.print("\n[bold green]☀️ Let's plan your day! Here are your top candidates:[/bold green]")
-    
-    # Get a smart list of tasks instead of all of them
-    candidate_tasks = get_focus_tasks(data)
-
-    if not candidate_tasks:
-        console.print("[yellow]You have no urgent or starred tasks to plan. Feel free to add some![/yellow]")
-        return
-    
-    # Display the curated list for selection
-    view_table = Table(title="Top Candidates for Today")
-    view_table.add_column("ID", style="cyan")
-    view_table.add_column("Name")
-    view_table.add_column("Group")
-    for task in candidate_tasks:
-        view_table.add_row(str(task['id']), task['name'], task['group_name'])
-    console.print(view_table)
-
-    # Clear existing stars (optional)
-    if console.input("\n[bold]Clear all other stars first? (y/n): [/bold]").lower() == 'y':
-        for group in data.get('groups', []):
-            for task in group.get('tasks', []):
-                task['starred'] = False
-        console.print("[yellow]Cleared all stars.[/yellow]")
-
-    # Get user's top priorities from the candidate list
-    id_string = console.input("[bold]Enter the IDs of up to 3 tasks to star as today's priorities: [/bold]")
-    try:
-        priority_ids = [int(i.strip()) for i in id_string.split(',') if i.strip()]
-        if not priority_ids: return
-
-        for task_id in priority_ids:
-            group, task = find_task_by_id(data, task_id)
-            if task:
-                task['starred'] = True
-            else:
-                console.print(f"[yellow]Warning: Task ID {task_id} not found.[/yellow]")
-        
-        # Award achievement if it's the first time
-        if not data['user_stats']['achievements']['planner']:
-            data['user_stats']['achievements']['planner'] = True
-            console.print("[bold magenta]🏆 Achievement Unlocked: The Planner![/bold magenta]")
-        
-        console.print("\n[bold green]Priorities starred! Good luck today.[/bold green]")
-
-    except ValueError:
-        console.print("[bold red]Invalid input. Please enter numbers separated by commas.[/bold red]")
-
+#DONE
 def mark_task_done(data, task_id):
     """Handles task completion, applying gamification and then either rescheduling or archiving."""
     group, task = find_task_by_id(data, task_id)
@@ -885,6 +860,7 @@ def mark_task_done(data, task_id):
         group['completed_tasks'].append(task)
         console.print(f"[green]Completed '{task['name']}'! You earned [bold]{points_earned}[/bold] points. Task archived.[/green]")
 
+#DONE
 def mark_sub_task_done(data, parent_id, sub_task_id):
     """Marks a sub-task as 'done'."""
     _, task = find_task_by_id(data, parent_id)
@@ -901,6 +877,7 @@ def mark_sub_task_done(data, parent_id, sub_task_id):
     except (ValueError, IndexError):
         console.print("[bold red]Error: Invalid sub-task number.[/bold red]")
 
+#DONE
 def delete_task(data, task_id):
     """Deletes a parent task using its global ID."""
     group, task_to_delete = find_task_by_id(data, task_id)
@@ -910,6 +887,7 @@ def delete_task(data, task_id):
     else:
         console.print("[bold red]Error: Invalid task ID.[/bold red]")
 
+#DONE
 def view_completed_tasks(data, group_name):
     """Displays a table of completed tasks for a specific group."""
     target_group = next((g for g in data['groups'] if g['name'].lower() == group_name.lower()), None)
@@ -936,6 +914,7 @@ def view_completed_tasks(data, group_name):
     
     console.print(table)
 
+#DONE
 def display_tasks_by_goal(data, active_theme):
     """A special view function to display tasks organized under their parent goals."""
     console.print("\n[bold magenta]--- Tasks Organized by Goal ---[/bold magenta]")
@@ -962,6 +941,7 @@ def display_tasks_by_goal(data, active_theme):
                       border_style=active_theme[title_color])
         console.print(panel)
 
+#DONE
 def view_tasks(data, active_theme, group_by='group', task_id=None, show_log=False, show_group=None, sort_by=None, filter_priority=None, filter_status=None, show_starred=False, filter_tag=None):
     # --- New: Handle single task view ---
     if task_id:
@@ -1066,6 +1046,7 @@ def view_tasks(data, active_theme, group_by='group', task_id=None, show_log=Fals
         
         console.print(table)
 
+#DONE
 def toggle_star(data, task_id, star_status: bool):
     """Stars or unstars a task by its global ID."""
     group, task = find_task_by_id(data, task_id)
@@ -1076,6 +1057,7 @@ def toggle_star(data, task_id, star_status: bool):
     else:
         console.print("[bold red]Error: Invalid task ID.[/bold red]")
 
+#DONE
 def log_progress(data, task_id, message):
     """Adds a timestamped progress note to a specific task."""
     group, task = find_task_by_id(data, task_id)
@@ -1092,6 +1074,7 @@ def log_progress(data, task_id, message):
     task.setdefault('log', []).append(log_entry)
     console.print(f"[green]Progress logged for task #{task_id}: '{task['name']}'.[/green]")
 
+#DONE
 def run_health_check(data):
     """Analyzes today's tasks and provides feedback on workload balance."""
     console.print("\n[bold cyan]🩺 Running a Health Check on Your Day...[/bold cyan]")
@@ -1237,6 +1220,7 @@ def main():
     parser_goal_add = subparsers.add_parser('goal-add', help='Add a new long-term goal')
     parser_goal_add.add_argument('name', type=str, help='The name of the goal')
     parser_goal_add.add_argument('description', type=str, nargs='?', default=None, help='Optional description of the goal')
+
     parser_goal_list = subparsers.add_parser('goal-list', help='List all goals')
     
     # --- New Proactive Command ---

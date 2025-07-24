@@ -1,0 +1,19 @@
+[project]
+name = "kairu"
+version = "0.1.0"
+description = "A gamified CLI productivity coach."
+dependencies = [
+    "rich",
+    "python-dateutil",
+]
+
+# Update the entry point to reflect the new location
+[project.scripts]
+kairu = "kairu.main:main"
+
+# Tell setuptools where to find our package
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
