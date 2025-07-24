@@ -1,6 +1,6 @@
 # Kairu - The Gamified Productivity Coach 🚀
 
-*An intelligent, hierarchical to-do list manager for your command line, built with a clean Object-Oriented architecture.*
+*An installable, Object-Oriented CLI application designed to build focus and motivation.*
 
 > Kairu is a sophisticated command-line application that transforms task management into a productive and engaging experience. It goes beyond a simple to-do list, offering a powerful suite of tools—from hierarchical organization and smart routines to a full gamification system—all designed to help you build focus, fight procrastination, and celebrate your progress directly from the terminal.
 
@@ -57,41 +57,44 @@ Get your local copy of Kairu up and running.
     git clone https://github.com/YourUsername/kairu.git
     cd kairu
     ```
-2.  **Create a `requirements.txt` file** with the following content:
+2.  **Install the project in editable mode:**:
     ```txt
-    rich
-    python-dateutil
-    ```
-3.  **Install dependencies**:
-    ```bash
-    pip install -r requirements.txt
+    pip install -e .
     ```
 
 -----
 
 ## 💻 Command Reference
 
-Kairu has a rich command set. Here are some of the most common commands. For a full list of options for any command, use `python todo.py <command> --help`.
+Once installed, you can run Kairu from anywhere using the kairu command. Here are some of the most common commands. For a full list of options for any command, use `kairu <command> --help`.
 
 | Command | Description | Example Usage |
 | :--- | :--- | :--- |
-| **`plan-day`** | Starts the guided daily planning routine. | `python todo.py plan-day` |
-| **`shutdown`** | Starts the guided end-of-day review. | `python todo.py shutdown` |
-| **`focus`** | Shows an intelligent view of current priorities. | `python todo.py focus -g "Work"` |
-| **`pomodoro`** | Starts the interactive Pomodoro timer. | `python todo.py pomodoro -w 50 -b 10` |
-| **`stats`** | Displays your gamification progress. | `python todo.py stats` |
-| **`unstuck`** | Helps you take action on a stale task. | `python todo.py unstuck` |
-| **`add <name>`** | Adds a new task to a group and goal. | `python todo.py add "New Task" -g Work --goal "Launch"`|
-| **`log <id>`** | Adds a progress note to a task. | `python todo.py log 3 -m "Draft complete"` |
-| **`view <id>`** | Shows a detailed view of a single task. | `python todo.py view 3 --show-log` |
-| **`done <id>`** | Completes and archives a task, awarding points. | `python todo.py done 3` |
+| **`plan-day`** | Starts the guided daily planning routine. | `kairu plan-day` |
+| **`shutdown`** | Starts the guided end-of-day review. | `kairu shutdown` |
+| **`focus`** | Shows an intelligent view of current priorities. | `kairu focus -g "Work"` |
+| **`pomodoro`** | Starts the interactive Pomodoro timer. | `kairu pomodoro -w 50 -b 10` |
+| **`stats`** | Displays your gamification progress. | `kairu stats` |
+| **`unstuck`** | Helps you take action on a stale task. | `kairu unstuck` |
+| **`add <name>`** | Adds a new task to a group and goal. | `kairu add "New Task" -g Work --goal "Launch"`|
+| **`log <id>`** | Adds a progress note to a task. | `kairu log 3 -m "Draft complete"` |
+| **`view <id>`** | Shows a detailed view of a single task. | `kairu view 3 --show-log` |
+| **`done <id>`** | Completes and archives a task, awarding points. | `kairu done 3` |
 
 -----
 
+## 🏗️ Architecture
+Kairu is built using a clean, Object-Oriented architecture with a clear separation of concerns:
+* `src/kairu/models.py`: The "engine" of the application. Contains the Task and TodoList classes and handles all data management and business logic.
+* `src/kairu/main.py`: The "user interface" layer. Handles command-line argument parsing and all console output and user interaction.
+* `tests/: Contains the pytest unit test suite for the data models.`
+  
+-----
 ## 🗺️ Roadmap
 
   * **Phase 4: Architectural Refactoring (Completed)**: Converted the procedural script into a clean Object-Oriented structure with a separate data layer (models.py) and UI layer (main.py).
-  * **Phase 5: Professionalization & Deployment**: Package the application to be installable via `pip` and write unit tests.
+  * **Phase 5: Professionalization & Deployment (Completed)**: Package the application to be installable via `pip` and write unit tests.
   * **Phase 6: Database Integration**: Replace the JSON file with a robust SQLite database.
+  * **Phase 7: API-First Architecture**: Decouple the application logic into a backend REST API.
 
 -----
